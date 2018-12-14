@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Book from './Book';
 import * as BooksAPI from './BooksAPI';
 
@@ -20,7 +20,7 @@ class Search extends Component {
     const query = event.target.value;
     this.setState({ query });
 
-    // if user input => run the search
+    // if user input, run search
     if (query) {
       BooksAPI.search(query.trim(), 20).then(books => {
         books.length > 0
@@ -28,7 +28,7 @@ class Search extends Component {
           : this.setState({ newBooks: [], searchErr: true });
       });
 
-      // if query is empty => reset state to default
+      // if query is empty, change to default state
     } else this.setState({ newBooks: [], searchErr: false });
   };
 

@@ -1,29 +1,30 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
-import '../css/App.css';
 import BookList from './BookList';
 import { Link } from 'react-router-dom';
 import Search from './Search';
+import '../css/App.css';
 
 class BooksApp extends React.Component {
   state = { books: [] };
 
+  // get all the books on load
   componentDidMount() {
-    // get books on load
     BooksAPI.getAll().then(books => this.setState({ books }));
   }
 
+  /**
+   * Method to set shelf for new or updated book,
+   * then update state with changed book;
+   * remove updated book from array and add updated book to array
+   */
   changeShelf = (changedBook, shelf) => {
     BooksAPI.update(changedBook, shelf).then(response => {
-      // set shelf for new or updated book
       changedBook.shelf = shelf;
-      // update state with changed book
       this.setState(prevState => ({
         books: prevState.books
-          // remove updated book from array
           .filter(book => book.id !== changedBook.id)
-          // add updated book to array
           .concat(changedBook)
       }));
     });
