@@ -4,6 +4,7 @@ import * as BooksAPI from './BooksAPI';
 import '../css/App.css';
 import BookList from './BookList';
 import { Link } from 'react-router-dom';
+import Search from './Search';
 
 class BooksApp extends React.Component {
   state = { books: [] };
@@ -34,7 +35,12 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Switch>
-          
+          <Route
+            path="/search"
+            render={({ history }) => (
+              <Search books={books} changeShelf={this.changeShelf} />
+            )}
+          />
           <Route
             exact
             path="/"

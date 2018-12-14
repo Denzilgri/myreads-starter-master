@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ShelfSwitcher from './ShelfSwitcher';
 import noCover from '../img/no-cover.png';
 
 class Book extends Component {
@@ -27,6 +28,7 @@ class Book extends Component {
               className="book-cover"
               style={{ backgroundImage: `url(${coverImg})` }}
             />
+            <ShelfSwitcher book={book} books={books} changeShelf={changeShelf} />
           </div>
           <div className="book-title">{title}</div>
           {/* Check for authors and render each on separate line if exist*/
